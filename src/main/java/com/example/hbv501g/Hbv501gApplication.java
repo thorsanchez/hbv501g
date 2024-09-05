@@ -8,7 +8,7 @@ public class Hbv501gApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Hbv501gApplication.class, args);
-		//comment frá Arnóri
+		//comment Arnór
 		System.out.println("Hello world");
 	}
 
