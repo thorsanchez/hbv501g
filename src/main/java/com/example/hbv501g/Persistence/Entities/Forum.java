@@ -11,7 +11,7 @@ public class Forum {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long forum_id;
-
+//
     private String name;
     private String description;
 
