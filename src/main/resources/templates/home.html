@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Posts</title>
 </head>
 <body>
-Some text
+
+<div th:switch="${posts}">
+    <h2 th:case="null">No Posts yet!</h2>
+    <div th:case="*">
+        <h2>Posts</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Tag</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post : ${posts}">
+                <td th:text="${post.tag}"></td>
+                <td th:text="${post.title}"></td>
+                <td th:text="${post.content}"></td>
+                <td><a th:href="@{/delete/{postId}(postId=${post.post_id})}">Delete</a></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/addpost">Add a new post</a></p>
+</div>
 </body>
 </html>
