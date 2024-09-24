@@ -6,7 +6,6 @@ import com.example.hbv501g.Services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,8 +24,8 @@ public class PostServiceImplementation implements PostService {
     }
 
     @Override
-    public Post findByID(long ID) {
-        return postRepository.findbyID(ID);
+    public Post findById(long ID) {
+        return postRepository.findById(ID);
     }
 
     @Override

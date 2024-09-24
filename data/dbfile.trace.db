@@ -1,0 +1,6 @@
+2024-09-24 21:57:14.240996Z jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "POSTS" not found (this database is empty); SQL statement:
+select p1_0.post_id,p1_0.content,p1_0.forum_forum_id,p1_0.tag,p1_0.timestamp,p1_0.title,p1_0.user_user_id from posts p1_0 [42104-224]
+2024-09-24 21:59:41.698527Z jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "POSTS" not found (this database is empty); SQL statement:
+select p1_0.post_id,p1_0.content,p1_0.forum_forum_id,p1_0.tag,p1_0.timestamp,p1_0.title,p1_0.user_user_id from posts p1_0 [42104-224]

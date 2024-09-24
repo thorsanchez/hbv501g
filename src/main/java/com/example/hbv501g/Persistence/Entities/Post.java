@@ -13,17 +13,25 @@ public class Post {
     private String title;
     private String content;
     private double timestamp;
-    private long forum_id;
-    private long user_id;
+
+    @ManyToOne
+   // @JoinColumn(name = "forum_id", nullable = false)
+    private Forum forum;
+
+    @ManyToOne
+    //@JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
 
     public Post() {
     }
 
-    public Post(String tag, String title, String content) {
+    public Post(String tag, String title, String content, Forum forum, User user) {
         this.tag = tag;
         this.title = title;
         this.content = content;
+        this.forum = forum;
+        this.user = user;
     }
 
     public long getPost_id() {
@@ -66,19 +74,19 @@ public class Post {
         this.timestamp = timestamp;
     }
 
-    public long getForum_id() {
-        return forum_id;
+    public Forum getForum() {
+        return forum;
     }
 
-    public void setForum_id(long forum_id) {
-        this.forum_id = forum_id;
+    public void setForum(Forum forum) {
+        this.forum = forum;
     }
 
-    public long getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
