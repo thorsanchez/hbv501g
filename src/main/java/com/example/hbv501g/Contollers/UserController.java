@@ -30,6 +30,7 @@ public class UserController {
         if(result.hasErrors()){
             return "redirect:/signup";
         }
+        userService.save(user);
         return "redirect:/";
     }
     //Signin (GET, POST)
