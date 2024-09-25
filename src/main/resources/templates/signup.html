@@ -7,9 +7,9 @@
 <body>
 <h2>SignUp here to create an account</h2>
 <form action="#" th:action="@{/signup}" th:object="${user}" method="post">
-  <input type="text" name="username" id="username" th:field="*{username}"/>
-  <input type="text" name="email" id="email" th:field="*{email}"/>
-  <input type="text" name="password" id="password" th:field="*{password}"/>
+  <input type="text" name="username" id="username" placeholder="username" th:field="*{username}"/>
+  <input type="text" name="email" id="email" placeholder="email" th:field="*{email}"/>
+  <input type="text" name="password" id="password" placeholder="password" th:field="*{password}"/>
   <input type="submit" value="Sign up"/>
 </form>
 </body>

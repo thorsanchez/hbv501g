@@ -30,7 +30,12 @@ public class UserController {
         if(result.hasErrors()){
             return "redirect:/signup";
         }
-        userService.save(user);
+        User exists = userService.findByUsername(user.getUsername());
+        if(exists == null){
+            userService.save(user);
+        }else {
+            System.out.println("This username is taken");
+        }
         return "redirect:/";
     }
     //Signin (GET, POST)
