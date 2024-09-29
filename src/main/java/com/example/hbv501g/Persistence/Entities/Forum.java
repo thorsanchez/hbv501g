@@ -14,6 +14,7 @@ public class Forum {
 //
     private String name;
     private String description;
+    private String category;
 
     @OneToMany(mappedBy = "forum", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Post> forumPosts = new ArrayList<>();
