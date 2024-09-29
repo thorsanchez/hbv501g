@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-public class HomeController {
+public class PostController {
     private PostService postService;
 
     @Autowired
-    public HomeController(PostService postService){
+    public PostController(PostService postService){
         this.postService = postService;
     }
 
@@ -42,6 +42,8 @@ public class HomeController {
         return "redirect:/";
     }
 
+
+    //Ekki fara yfir þetta bara búa til post
     @RequestMapping(value = "/delete/{postId}", method = RequestMethod.GET)
     public String deletePost(@PathVariable("postId") long id, Model model){
         Post postToDelete = postService.findById(id);
