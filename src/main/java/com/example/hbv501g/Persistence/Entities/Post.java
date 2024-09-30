@@ -14,8 +14,12 @@ public class Post {
     private String content;
     private double timestamp;
 
+    //likes og dislike
+    private int likes = 0;
+    private int dislikes = 0;
+
     @ManyToOne
-   // @JoinColumn(name = "forum_id", nullable = false)
+    // @JoinColumn(name = "forum_id", nullable = false)
     private Forum forum;
 
     @ManyToOne
@@ -32,6 +36,8 @@ public class Post {
         this.content = content;
         this.forum = forum;
         this.user = user;
+        this.likes = likes;
+        this.dislikes = dislikes;
     }
 
     public long getPost_id() {
@@ -89,4 +95,21 @@ public class Post {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public int setLikes() {
+        return likes;
+    }
+
+    public int getDislikes() {
+        return dislikes;
+    }
+
+    public int setDislikes() {
+        return dislikes;
+    }
+
 }
