@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Forum: ' + ${forum.name}">Forum Details</title>
+</head>
+<body>
+
+<h1 th:text="'Forum: ' + ${forum.name}">Forum Name</h1>
+<p th:text="${forum.description}">Forum Description</p>
+
+<h2>Posts in this Forum</h2>
+<div th:switch="${posts}">
+    <h2 th:case="null">No Posts yet!</h2>
+    <div th:case="*">
+        <table>
+            <thead>
+            <tr>
+                <th>Post Title</th>
+                <th>Content</th>
+                <th>Posted By</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post : ${posts}">
+                <td th:text="${post.title}">Post Title</td>
+                <td th:text="${post.content}">Post Content</td>
+                <td th:text="${post.user}">Author</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

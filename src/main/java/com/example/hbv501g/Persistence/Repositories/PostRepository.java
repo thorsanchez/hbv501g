@@ -9,9 +9,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Post save(Post post);
     void delete(Post post);
-
     List<Post> findAll();
     List<Post> findByTitle(String title);
     Post findById(long post_id);
-
 }

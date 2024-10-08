@@ -42,4 +42,5 @@ public class PostServiceImplementation implements PostService {
     public void delete(Post post) {
         postRepository.delete(post);
     }
+
 }

@@ -2,6 +2,8 @@ package com.example.hbv501g.Persistence.Entities;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "posts")
 public class Post {
@@ -12,7 +14,7 @@ public class Post {
     private String tag;
     private String title;
     private String content;
-    private double timestamp;
+   // private Date timestamp;
 
     @ManyToOne
    // @JoinColumn(name = "forum_id", nullable = false)
@@ -66,13 +68,13 @@ public class Post {
         this.content = content;
     }
 
-    public double getTimestamp() {
-        return timestamp;
-    }
+   // public Date getTimestamp() {
+    //    return timestamp;
+   // }
 
-    public void setTimestamp(double timestamp) {
-        this.timestamp = timestamp;
-    }
+    //public void setTimestamp(Date timestamp) {
+   //     this.timestamp = timestamp;
+  //  }
 
     public Forum getForum() {
         return forum;
