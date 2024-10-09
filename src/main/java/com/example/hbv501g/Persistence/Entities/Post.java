@@ -17,11 +17,11 @@ public class Post {
    // private Date timestamp;
 
     @ManyToOne
-   // @JoinColumn(name = "forum_id", nullable = false)
+    @JoinColumn(name = "forum_forum_id", nullable = false)
     private Forum forum;
 
     @ManyToOne
-    //@JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_user_id", nullable = false)
     private User user;
 
 
@@ -90,5 +90,15 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + post_id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

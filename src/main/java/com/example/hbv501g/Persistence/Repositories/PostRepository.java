@@ -1,5 +1,6 @@
 package com.example.hbv501g.Persistence.Repositories;
 
+import com.example.hbv501g.Persistence.Entities.Forum;
 import com.example.hbv501g.Persistence.Entities.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,4 +13,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findAll();
     List<Post> findByTitle(String title);
     Post findById(long post_id);
+    List<Post> findPostByForum(Forum forum);
 }

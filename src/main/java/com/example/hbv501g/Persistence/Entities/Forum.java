@@ -15,7 +15,16 @@ public class Forum {
     private String description;
 
     @OneToMany(mappedBy = "forum", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Post> forumPosts = new ArrayList<>();
+    private List<Post> forumPosts;
+
+
+    public List<Post> getForumPosts() {
+        return forumPosts;
+    }
+
+    public void setForumPosts(List<Post> forumPosts) {
+        this.forumPosts = forumPosts;
+    }
 
     public Forum() {
     }

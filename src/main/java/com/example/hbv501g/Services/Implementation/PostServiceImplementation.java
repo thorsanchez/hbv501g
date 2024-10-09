@@ -1,5 +1,6 @@
 package com.example.hbv501g.Services.Implementation;
 
+import com.example.hbv501g.Persistence.Entities.Forum;
 import com.example.hbv501g.Persistence.Entities.Post;
 import com.example.hbv501g.Persistence.Repositories.PostRepository;
 import com.example.hbv501g.Services.PostService;
@@ -41,6 +42,11 @@ public class PostServiceImplementation implements PostService {
     @Override
     public void delete(Post post) {
         postRepository.delete(post);
+    }
+
+    @Override
+    public List<Post> getPostByForum(Forum forum) {
+        return postRepository.findPostByForum(forum);
     }
 
 }

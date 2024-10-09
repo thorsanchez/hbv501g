@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,15 +53,16 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/forum/{forumId}", method = RequestMethod.GET)
-    public String intoForum(@PathVariable("forumId") long id, Model model){
-        System.out.println("forumId = " + id);  // Log the forumId
-        Forum forum = forumService.findById(id);
-        List<Post> posts = postService.findAll();
+    //@RequestMapping(value = "/forum/{forumId}", method = RequestMethod.GET)
+    @GetMapping("/forum/{forumId}")
+    public String intoForum(@PathVariable("forumId") long forumId, Model model){
+        System.out.println("forumId = " + forumId);
+        Forum forum = forumService.findById(forumId);
+        List<Post> forumPosts = postService.getPostByForum(forum);
 
         model.addAttribute("forum", forum);
-        model.addAttribute("posts", posts);
-        model.addAttribute("newPosts", new Post());
+        model.addAttribute("posts", forumPosts);
+        //model.addAttribute("newPosts", new Post());
         return "forum";}
 }
 
