@@ -2,6 +2,8 @@ package com.example.hbv501g.Persistence.Entities;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "posts")
 public class Post {
@@ -12,18 +14,18 @@ public class Post {
     private String tag;
     private String title;
     private String content;
-    private double timestamp;
+   // private Date timestamp;
 
     //likes og dislike
     private int likes = 0;
     private int dislikes = 0;
 
     @ManyToOne
-    // @JoinColumn(name = "forum_id", nullable = false)
+    @JoinColumn(name = "forum_forum_id", nullable = false)
     private Forum forum;
 
     @ManyToOne
-    //@JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_user_id", nullable = false)
     private User user;
 
 
@@ -72,13 +74,13 @@ public class Post {
         this.content = content;
     }
 
-    public double getTimestamp() {
-        return timestamp;
-    }
+   // public Date getTimestamp() {
+    //    return timestamp;
+   // }
 
-    public void setTimestamp(double timestamp) {
-        this.timestamp = timestamp;
-    }
+    //public void setTimestamp(Date timestamp) {
+   //     this.timestamp = timestamp;
+  //  }
 
     public Forum getForum() {
         return forum;
@@ -96,6 +98,15 @@ public class Post {
         this.user = user;
     }
 
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + post_id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
     public int getLikes() {
         return likes;
     }
