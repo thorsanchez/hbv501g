@@ -13,6 +13,7 @@ public class Forum {
     private long forum_id;
     private String name;
     private String description;
+    private String category;
 
     @OneToMany(mappedBy = "forum", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> forumPosts;
