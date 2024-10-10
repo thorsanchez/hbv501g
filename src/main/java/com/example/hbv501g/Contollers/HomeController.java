@@ -62,7 +62,7 @@ public class HomeController {
 
         model.addAttribute("forum", forum);
         model.addAttribute("posts", forumPosts);
-        //model.addAttribute("newPosts", new Post());
+        model.addAttribute("newPosts", new Post());
         return "forum";}
 }
 

@@ -1,6 +1,7 @@
 package com.example.hbv501g.Contollers;
 
 import com.example.hbv501g.Persistence.Entities.Post;
+import com.example.hbv501g.Services.ForumService;
 import com.example.hbv501g.Services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,20 +15,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PostController {
 
     private PostService postService;
+    private ForumService forumService;
 
     @Autowired
-    public PostController(PostService postService){this.postService = postService;}
+    public PostController(PostService postService, ForumService forumService){
+        this.postService = postService;
+        this.forumService = forumService;
+    }
 
-    @RequestMapping(value = "/addpost", method = RequestMethod.GET)
+    @RequestMapping(value = "/forum/{forumId}/addpost", method = RequestMethod.GET)
     public String addPostForm(Post post){
         return "newPost";
     }
 
-    @RequestMapping(value = "/addpost", method = RequestMethod.POST)
-    public String addPost(Post post, BindingResult result, Model model){
+    @RequestMapping(value = "/forum/{forumId}/addpost", method = RequestMethod.POST)
+    public String addPost(@PathVariable("forumId") long forumId, Post post, BindingResult result, Model model){
         if(result.hasErrors()){
             return "newPost";
         }
+
         postService.save(post);
         return "redirect:/";
     }

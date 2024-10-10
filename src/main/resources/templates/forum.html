@@ -26,11 +26,11 @@
             <tr th:each="post : ${posts}">
                 <td th:text="${post.title}">Post Title</td>
                 <td th:text="${post.content}">Post Content</td>
-                <td th:text="${post.user}">Author</td>
+                <td th:text="${post.user.getUsername()}">Author</td>
             </tr>
             </tbody>
         </table>
     </div>
-
+</div>
 </body>
 </html>
