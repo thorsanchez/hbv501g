@@ -16,52 +16,55 @@ public class UserController {
     UserService userService;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService) {
         this.userService = userService;
     }
+
     //Signup (GET, POST)
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String signupGET(User user){
+    public String signupGET(User user) {
         return "signup";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signupPOST(User user, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String signupPOST(User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             return "redirect:/signup";
         }
         User exists = userService.findByUsername(user.getUsername());
-        if(exists == null){
+        if (exists == null) {
             userService.save(user);
-        }else {
+        } else {
             System.out.println("This username is taken");
         }
         return "redirect:/";
     }
+
     //Signin (GET, POST)
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginGET(User user){
+    public String loginGET(User user) {
         return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginPOST(User user, BindingResult result, Model model, HttpSession session){
-        if(result.hasErrors()){
+    public String loginPOST(User user, BindingResult result, Model model, HttpSession session) {
+        if (result.hasErrors()) {
             return "login";
         }
         User exists = userService.login(user);
-        if(exists != null){
+        if (exists != null) {
             session.setAttribute("LoggedInUser", exists);
             model.addAttribute("LoggedInUser", exists);
             return "LoggedInUser";
         }
         return "redirect:/";
     }
+
     //loggedin (GET)
     @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
-    public String loggedinGET(HttpSession session, Model model){
+    public String loggedinGET(HttpSession session, Model model) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if(sessionUser != null){
+        if (sessionUser != null) {
             model.addAttribute("LoggedInUser", sessionUser);
             return "LoggedInUser";
         }

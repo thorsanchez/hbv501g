@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -19,6 +20,11 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Post> userPosts = new ArrayList<>();
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(user_id);
+    }
+
     public User() {
     }
 
@@ -26,6 +32,14 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public long getUserId() {
+        return user_id;
+    }
+
+    public void setUserId(long user_id) {
+        this.user_id = user_id;
     }
 
     public String getUsername() {
