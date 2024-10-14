@@ -2,7 +2,6 @@ package com.example.hbv501g.Persistence.Entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +17,10 @@ public class Forum {
     @OneToMany(mappedBy = "forum", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> forumPosts;
 
+    //tengja forum við User
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User createdBy;
 
     public List<Post> getForumPosts() {
         return forumPosts;
@@ -57,5 +60,13 @@ public class Forum {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
     }
 }
