@@ -42,15 +42,13 @@ public class PostController {
         User loggedInUser = (User) session.getAttribute("LoggedInUser");
         System.out.println(loggedInUser.getUserId());
         Forum forumData = (Forum) session.getAttribute("ForumData");
-        System.out.println(forumData.getForum_id());
+
+        
         
         if (loggedInUser != null) {
-            System.out.println("Ekki villa");
             // setja user sem creator
             post.setUser(loggedInUser);
-            System.out.println("Ekki villa");
             post.setForum(forumData);
-            System.out.println("Ekki villa");
             post.setLikes();
             post.setDislikes();
             System.out.println(loggedInUser.getUserId());
@@ -58,9 +56,9 @@ public class PostController {
             postService.save(post);
             
             //System.out.println("Forum creater: " + loggedInUser.getUsername());
-            return "redirect:";
+            return "redirect:/forum/{forumId}";
         } else {
-            return "redirect:";
+            return "redirect:/forum/{forumId}";
         }
         
     }
