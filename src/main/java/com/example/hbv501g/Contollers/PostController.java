@@ -1,8 +1,5 @@
 package com.example.hbv501g.Contollers;
 
-import com.example.hbv501g.Persistence.Entities.Post;
-import com.example.hbv501g.Services.ForumService;
-import com.example.hbv501g.Services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +7,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.example.hbv501g.Persistence.Entities.Forum;
+import com.example.hbv501g.Persistence.Entities.Post;
+import com.example.hbv501g.Persistence.Entities.User;
+import com.example.hbv501g.Services.ForumService;
+import com.example.hbv501g.Services.PostService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class PostController {
@@ -23,19 +28,41 @@ public class PostController {
         this.forumService = forumService;
     }
 
-    @RequestMapping(value = "/forum/{forumId}/addpost", method = RequestMethod.GET)
+    @RequestMapping(value = "/forum/addpost", method = RequestMethod.GET)
     public String addPostForm(Post post){
         return "newPost";
     }
 
-    @RequestMapping(value = "/forum/{forumId}/addpost", method = RequestMethod.POST)
-    public String addPost(@PathVariable("forumId") long forumId, Post post, BindingResult result, Model model){
+    @RequestMapping(value = "/forum/addpost", method = RequestMethod.POST)
+    public String addPost(@PathVariable("forumId") Long forumId, Post post, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
             return "newPost";
         }
 
-        postService.save(post);
-        return "redirect:/";
+        User loggedInUser = (User) session.getAttribute("LoggedInUser");
+        System.out.println(loggedInUser.getUserId());
+        Forum forumData = (Forum) session.getAttribute("ForumData");
+        System.out.println(forumData.getForum_id());
+        
+        if (loggedInUser != null) {
+            System.out.println("Ekki villa");
+            // setja user sem creator
+            post.setUser(loggedInUser);
+            System.out.println("Ekki villa");
+            post.setForum(forumData);
+            System.out.println("Ekki villa");
+            post.setLikes();
+            post.setDislikes();
+            System.out.println(loggedInUser.getUserId());
+
+            postService.save(post);
+            
+            //System.out.println("Forum creater: " + loggedInUser.getUsername());
+            return "redirect:";
+        } else {
+            return "redirect:";
+        }
+        
     }
 
     @RequestMapping(value = "/posts/delete/{postId}", method = RequestMethod.GET)

@@ -1,11 +1,7 @@
 package com.example.hbv501g.Contollers;
 
-import com.example.hbv501g.Persistence.Entities.Forum;
-import com.example.hbv501g.Persistence.Entities.Post;
-import com.example.hbv501g.Persistence.Entities.User;
-import com.example.hbv501g.Services.ForumService;
-import com.example.hbv501g.Services.PostService;
-import jakarta.servlet.http.HttpSession;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
+import com.example.hbv501g.Persistence.Entities.Forum;
+import com.example.hbv501g.Persistence.Entities.Post;
+import com.example.hbv501g.Persistence.Entities.User;
+import com.example.hbv501g.Services.ForumService;
+import com.example.hbv501g.Services.PostService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -54,7 +56,9 @@ public class HomeController {
         if (loggedInUser != null) {
             // setja user sem creator
             forum.setCreatedBy(loggedInUser);
+            System.out.println(loggedInUser.getUserId());
             forumService.save(forum);
+            session.setAttribute("ForumData", forum);
             //System.out.println("Forum creater: " + loggedInUser.getUsername());
             return "redirect:/";
         } else {
