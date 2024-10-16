@@ -28,13 +28,13 @@ public class PostController {
         this.forumService = forumService;
     }
 
-    @RequestMapping(value = "/forum/addpost", method = RequestMethod.GET)
+    @RequestMapping(value = "/addpost", method = RequestMethod.GET)
     public String addPostForm(Post post){
         return "newPost";
     }
 
-    @RequestMapping(value = "/forum/addpost", method = RequestMethod.POST)
-    public String addPost(@PathVariable("forumId") Long forumId, Post post, BindingResult result, Model model, HttpSession session){
+    @RequestMapping(value = "/addpost", method = RequestMethod.POST)
+    public String addPost( Post post, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
             return "newPost";
         }

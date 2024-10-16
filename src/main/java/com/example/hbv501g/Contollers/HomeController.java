@@ -58,7 +58,6 @@ public class HomeController {
             forum.setCreatedBy(loggedInUser);
             System.out.println(loggedInUser.getUserId());
             forumService.save(forum);
-            session.setAttribute("ForumData", forum);
             //System.out.println("Forum creater: " + loggedInUser.getUsername());
             return "redirect:/";
         } else {
@@ -84,11 +83,12 @@ public class HomeController {
 
     //@RequestMapping(value = "/forum/{forumId}", method = RequestMethod.GET)
     @GetMapping("/forum/{forumId}")
-    public String intoForum(@PathVariable("forumId") long forumId, Model model) {
+    public String intoForum(@PathVariable("forumId") long forumId, Model model, HttpSession session) {
         System.out.println("forumId = " + forumId);
         Forum forum = forumService.findById(forumId);
         List<Post> forumPosts = postService.getPostByForum(forum);
-
+        Forum forumData = forum;
+        session.setAttribute("ForumData", forumData);
         model.addAttribute("forum", forum);
         model.addAttribute("posts", forumPosts);
         model.addAttribute("newPosts", new Post());
