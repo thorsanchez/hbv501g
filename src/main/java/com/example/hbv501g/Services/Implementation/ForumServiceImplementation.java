@@ -36,4 +36,18 @@ public class ForumServiceImplementation implements ForumService {
     public Forum findById(long ID) {
         return forumRepository.findById(ID);
     }
+
+    @Override
+    public Forum edit(Forum forum, String name, String description, String category) {
+        if (name != "") {
+            forum = forumRepository.setName(forum, name);
+        }
+        if (description != "") {
+            forum = forumRepository.setDescription(forum, description);
+        }
+        if (category != "") {
+            forum = forumRepository.setCategory(forum, category);
+        }
+        return forum;
+    }
 }

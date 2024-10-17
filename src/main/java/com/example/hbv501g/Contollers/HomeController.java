@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -77,7 +78,24 @@ public class HomeController {
             forumService.delete(forumToDelete);
             System.out.println("forum deleted");
         } else {
-            System.out.println("user canrt delete forum");
+            System.out.println("user can't delete forum");
+        }
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/forum/edit/{forumId}", method = RequestMethod.PATCH)
+    public String editForum(@PathVariable("forumId") long id, @RequestParam(required = false) String name, 
+                                                              @RequestParam(required = false) String description, 
+                                                              @RequestParam(required = false) String category, HttpSession session) {
+        Forum forumToEdit = forumService.findById(id);
+        User loggedInUser = (User) session.getAttribute("LoggedInUser");
+
+        // bera saman id
+        if (forumToEdit.getCreatedBy().getUserId() == loggedInUser.getUserId()) {
+            forumService.edit(forumToEdit, name, description, category);
+            System.out.println("forum edited");
+        } else {
+            System.out.println("user can't edit forum");
         }
         return "redirect:/";
     }
