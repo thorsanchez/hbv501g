@@ -120,12 +120,10 @@ public class Post {
     }
 
     public int getDislikes() {
-        likes=1;
         return dislikes;
     }
 
     public int setDislikes() {
-        dislikes=1;
         return dislikes;
     }
 

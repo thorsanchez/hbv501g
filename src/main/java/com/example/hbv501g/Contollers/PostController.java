@@ -50,11 +50,6 @@ public class PostController {
             // setja user sem creator
             post.setUser(loggedInUser);
             post.setForum(forumData);
-            System.out.println("Ekki villa");
-            post.setLikes();
-            post.setDislikes();
-            System.out.println(loggedInUser.getUserId());
-
             postService.save(post);
             
             //System.out.println("Forum creater: " + loggedInUser.getUsername());
