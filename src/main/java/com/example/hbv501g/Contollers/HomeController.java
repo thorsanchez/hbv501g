@@ -1,11 +1,7 @@
 package com.example.hbv501g.Contollers;
 
-import com.example.hbv501g.Persistence.Entities.Forum;
-import com.example.hbv501g.Persistence.Entities.Post;
-import com.example.hbv501g.Persistence.Entities.User;
-import com.example.hbv501g.Services.ForumService;
-import com.example.hbv501g.Services.PostService;
-import jakarta.servlet.http.HttpSession;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import com.example.hbv501g.Persistence.Entities.Forum;
+import com.example.hbv501g.Persistence.Entities.Post;
+import com.example.hbv501g.Persistence.Entities.User;
+import com.example.hbv501g.Services.ForumService;
+import com.example.hbv501g.Services.PostService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -55,6 +57,7 @@ public class HomeController {
         if (loggedInUser != null) {
             // setja user sem creator
             forum.setCreatedBy(loggedInUser);
+            System.out.println(loggedInUser.getUserId());
             forumService.save(forum);
             //System.out.println("Forum creater: " + loggedInUser.getUsername());
             return "redirect:/";
@@ -102,11 +105,12 @@ public class HomeController {
 
     //@RequestMapping(value = "/forum/{forumId}", method = RequestMethod.GET)
     @GetMapping("/forum/{forumId}")
-    public String intoForum(@PathVariable("forumId") long forumId, Model model) {
+    public String intoForum(@PathVariable("forumId") long forumId, Model model, HttpSession session) {
         System.out.println("forumId = " + forumId);
         Forum forum = forumService.findById(forumId);
         List<Post> forumPosts = postService.getPostByForum(forum);
-
+        Forum forumData = forum;
+        session.setAttribute("ForumData", forumData);
         model.addAttribute("forum", forum);
         model.addAttribute("posts", forumPosts);
         model.addAttribute("newPosts", new Post());
