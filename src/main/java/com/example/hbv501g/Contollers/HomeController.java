@@ -70,6 +70,10 @@ public class HomeController {
 
         // bera saman id
         if (forumToDelete.getCreatedBy().getUserId() == loggedInUser.getUserId()) {
+            List<Post> posts = postService.getPostByForum(forumToDelete);
+            for (Post p : posts) {
+                postService.delete(p);
+            }
             forumService.delete(forumToDelete);
             System.out.println("forum deleted");
         } else {
