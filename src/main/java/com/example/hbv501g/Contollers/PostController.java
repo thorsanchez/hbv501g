@@ -46,9 +46,11 @@ public class PostController {
         
         
         if (loggedInUser != null) {
+
             // setja user sem creator
             post.setUser(loggedInUser);
             post.setForum(forumData);
+            System.out.println("Ekki villa");
             post.setLikes();
             post.setDislikes();
             System.out.println(loggedInUser.getUserId());
@@ -56,9 +58,9 @@ public class PostController {
             postService.save(post);
             
             //System.out.println("Forum creater: " + loggedInUser.getUsername());
-            return "redirect:/forum/{forumId}";
+            return "redirect:";
         } else {
-            return "redirect:/forum/{forumId}";
+            return "redirect:";
         }
         
     }
