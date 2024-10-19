@@ -60,7 +60,7 @@ public class HomeController {
             forum.setCreatedBy(loggedInUser);
             System.out.println(loggedInUser.getUserId());
             forumService.save(forum);
-            //System.out.println("Forum creater: " + loggedInUser.getUsername());
+            System.out.println("Forum creater: " + forum.getCreatedBy().getUsername());
             return "redirect:/";
         } else {
             return "redirect:/";
@@ -87,8 +87,14 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/forum/edit/{forumId}", method = RequestMethod.PATCH)
-    public String editForum(@PathVariable("forumId") long id, @RequestParam(required = false) String name, 
+    @RequestMapping(value = "/forum/editForum/{forumId}", method = RequestMethod.GET)
+    public String editForumForm(@PathVariable("forumId") long id, Forum forum, Model model) {
+        Forum forumToEdit = forumService.findById(id);
+        model.addAttribute("forum", forumToEdit);
+        return "editForum";
+    }
+    @RequestMapping(value = "/forum/editForum/{forumId}", method = RequestMethod.POST)
+    public String editForum(@PathVariable("forumId") long id, Model model, @RequestParam(required = false) String name,
                                                               @RequestParam(required = false) String description, 
                                                               @RequestParam(required = false) String category, HttpSession session) {
         Forum forumToEdit = forumService.findById(id);
@@ -96,6 +102,7 @@ public class HomeController {
 
         // bera saman id
         if (forumToEdit.getCreatedBy().getUserId() == loggedInUser.getUserId()) {
+            //model.addAttribute("forum", forumToEdit);
             forumService.edit(forumToEdit, name, description, category);
             System.out.println("forum edited");
         } else {
@@ -118,11 +125,12 @@ public class HomeController {
         model.addAttribute("newPosts", new Post());
         return "forum";
     }
-}
 
-class PostComparator implements java.util.Comparator<Post> {
-    @Override
-    public int compare(Post a, Post b) {
-        return (a.getLikes() + b.getDislikes()) - (b.getLikes() + a.getDislikes());
+    static class PostComparator implements java.util.Comparator<Post> {
+        @Override
+        public int compare(Post a, Post b) {
+            return (a.getLikes() + b.getDislikes()) - (b.getLikes() + a.getDislikes());
+        }
     }
 }
+

@@ -39,6 +39,11 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
+    public User findById(long ID) {
+        return userRepository.findById(ID);
+    }
+
+    @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
@@ -54,4 +59,9 @@ public class UserServiceImplementation implements UserService {
         }
         return null;
     }
+/*
+    @Override
+    public void updateByPassword(String username, String password) {
+        userRepository.updateByPassword(username, password);
+    }*/
 }

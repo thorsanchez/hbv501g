@@ -39,8 +39,7 @@ public class UserController {
         }
         return "redirect:/";
     }
-
-    //Signin (GET, POST)
+    
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginGET(User user) {
         return "login";
@@ -70,4 +69,14 @@ public class UserController {
         }
         return "redirect:/";
     }
+/*
+    @RequestMapping(value = "/forgotPassword", method = RequestMethod.PATCH)
+    public String forgotPassword(String username, String password, Model model){
+        User user = userService.findByUsername(username);
+        if(user != null){
+            userService.updateByPassword(username, password);
+            model.addAttribute("user", user);
+        }
+        return "redirect:";
+    }*/
 }
