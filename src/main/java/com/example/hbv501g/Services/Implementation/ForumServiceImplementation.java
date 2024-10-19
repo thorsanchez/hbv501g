@@ -14,10 +14,9 @@ public class ForumServiceImplementation implements ForumService {
     ForumRepository forumRepository;
 
     @Autowired
-    public ForumServiceImplementation(ForumRepository forumRepository) {
+    public ForumServiceImplementation(ForumRepository forumRepository){
         this.forumRepository = forumRepository;
     }
-
     @Override
     public Forum save(Forum forum) {
         return forumRepository.save(forum);
@@ -40,7 +39,7 @@ public class ForumServiceImplementation implements ForumService {
 
     @Override
     public Forum edit(Forum forum, String name, String description, String category) {
-        
+
         if (name != "") {
             forum.setName(name);
         }
