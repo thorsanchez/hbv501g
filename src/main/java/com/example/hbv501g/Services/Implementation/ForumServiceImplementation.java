@@ -14,9 +14,10 @@ public class ForumServiceImplementation implements ForumService {
     ForumRepository forumRepository;
 
     @Autowired
-    public ForumServiceImplementation(ForumRepository forumRepository){
+    public ForumServiceImplementation(ForumRepository forumRepository) {
         this.forumRepository = forumRepository;
     }
+
     @Override
     public Forum save(Forum forum) {
         return forumRepository.save(forum);
@@ -39,15 +40,16 @@ public class ForumServiceImplementation implements ForumService {
 
     @Override
     public Forum edit(Forum forum, String name, String description, String category) {
+        
         if (name != "") {
-            forum = forumRepository.setName(forum, name);
+            forum.setName(name);
         }
         if (description != "") {
-            forum = forumRepository.setDescription(forum, description);
+            forum.setDescription(description);
         }
         if (category != "") {
-            forum = forumRepository.setCategory(forum, category);
+            forum.setCategory(category);
         }
-        return forum;
+        return forumRepository.save(forum);
     }
 }

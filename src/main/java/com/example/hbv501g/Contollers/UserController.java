@@ -66,7 +66,24 @@ public class UserController {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if (sessionUser != null) {
             model.addAttribute("LoggedInUser", sessionUser);
-            return "LoggedInUser";
+            //th
+            return "redirect:/loggedin"; // Redirect to a logged-in user page
+        } else {
+            model.addAttribute("loginError", "Invalid username or password");
+            return "login"; // Return to login page with error
+        }
+    }
+
+    //loggedout GET
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutGET(HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser != null) {
+            // Update user logged in status
+            userService.setLoggedIn(sessionUser, false);
+            // loka session
+            session.invalidate();
+            System.out.println("User logged out: " + sessionUser.getUsername());
         }
         return "redirect:/";
     }

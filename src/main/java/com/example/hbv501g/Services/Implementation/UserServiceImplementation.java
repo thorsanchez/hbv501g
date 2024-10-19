@@ -14,7 +14,7 @@ public class UserServiceImplementation implements UserService {
     UserRepository userRepository;
 
     @Autowired
-    public UserServiceImplementation(UserRepository userRepository){
+    public UserServiceImplementation(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -47,11 +47,20 @@ public class UserServiceImplementation implements UserService {
     public User login(User user) {
         User doesExist = findByUsername(user.getUsername());
         System.out.println("User fetched: " + doesExist);
-        if(doesExist != null){
-            if(doesExist.getPassword().equals(user.getPassword())){
+        if (doesExist != null) {
+            if (doesExist.getPassword().equals(user.getPassword())) {
+                //Set user as logged in
+                doesExist.setLoggedIn(true);
+                userRepository.save(doesExist);
                 return doesExist;
             }
         }
         return null;
+    }
+
+    @Override
+    public void setLoggedIn(User user, boolean status) {
+        user.setLoggedIn(status);
+        userRepository.save(user);
     }
 }

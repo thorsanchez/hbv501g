@@ -17,6 +17,8 @@ public class User {
     private String password;
     private String email;
 
+    private boolean loggedIn;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Post> userPosts = new ArrayList<>();
 
@@ -32,6 +34,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.loggedIn = false;
     }
 
     public long getUserId() {
@@ -64,5 +67,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
     }
 }
