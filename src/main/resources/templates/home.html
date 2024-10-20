@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Forums</title>
+</head>
+<body>
+
+<div th:switch="${forum}">
+    <h2 th:case="null">No Forums yet!</h2>
+    <div th:case="*">
+        <h2>Forums</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Category</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="forum : ${forum}">
+                <td th:text="${forum.name}"></td>
+                <td th:text="${forum.description}"></td>
+                <td th:text="${forum.category}"></td>
+                <td><a th:href="@{/forum/{forumId}(forumId=${forum.forum_id})}">View Forum</a></td>
+                <td><a th:href="@{/forum/editForum/{forumId}(forumId=${forum.forum_id})}">Edit Forum</a></td>
+                <td><a th:href="@{/forum/delete/{forumId}(forumId=${forum.forum_id})}">Delete</a></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p><a href="/signup">Signup</a></p>
+    <p><a href="/login">Login</a></p>
+    <p><a href="/addforum">Create Forum</a></p>
+    <p></p><a href="/logout">Logout</a></p>
+</div>
+</body>
+</html>
