@@ -15,13 +15,16 @@
             <tr>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Category</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="forum : ${forum}">
                 <td th:text="${forum.name}"></td>
                 <td th:text="${forum.description}"></td>
+                <td th:text="${forum.category}"></td>
                 <td><a th:href="@{/forum/{forumId}(forumId=${forum.forum_id})}">View Forum</a></td>
+                <td><a th:href="@{/forum/editForum/{forumId}(forumId=${forum.forum_id})}">Edit Forum</a></td>
                 <td><a th:href="@{/forum/delete/{forumId}(forumId=${forum.forum_id})}">Delete</a></td>
 
             </tr>
